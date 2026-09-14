@@ -9,8 +9,3 @@ module "instance" {
 }
 
 
-module "instance1" {
-  source        = ".//mod"
-  instance_type = "t3.micro"
-  instance_tag  = "stag"
-}
