@@ -16,26 +16,28 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                dir('mdec2'){
-                sh 'terraform init'
+                dir('mdec2') {
+                    sh 'terraform init'
+                }
             }
         }
-        }
+
         stage('Terraform Validate') {
             steps {
-                 dir('mdec2'){
-                sh 'terraform validate'
+                dir('mdec2') {
+                    sh 'terraform validate'
+                }
             }
-        }
         }
 
         stage('Terraform Plan') {
             steps {
-                 dir('mdec2'){
-                sh 'terraform plan -out=tfplan'
+                dir('mdec2') {
+                    sh 'terraform plan -out=tfplan'
+                }
             }
         }
-        }
+
         stage('Manual Approval') {
             steps {
                 input message: 'Review the plan above. Proceed with apply?', ok: 'Apply'
@@ -45,7 +47,8 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 dir('mdec2') {
-                sh 'terraform apply -auto-approve tfplan'
+                    sh 'terraform apply -auto-approve tfplan'
+                }
             }
         }
     }
@@ -58,5 +61,4 @@ pipeline {
             echo 'Pipeline failed. Check the stage logs above.'
         }
     }
-}
 }
